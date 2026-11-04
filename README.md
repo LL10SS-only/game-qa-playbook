@@ -37,6 +37,29 @@
 - 03 回归范围怎么定：冒烟、核心、全量三级的划分依据，以及什么时候可以不做全量
 - 04 配置表校验的六类规则：必填、类型、唯一、引用、区间、跨表一致
 
+## 仓库结构
+
+```
+game-qa-playbook/
+├── docs/                    两篇方法正文 + 单页版（index.html）
+├── samples/                 五类脱敏资产，每个目录一份 README
+├── templates/               缺陷单、用例表
+└── CONTRIBUTING.md          命名与提交规范
+```
+
+目录用英文，是因为中文路径在 URL 里会被转义成一长串编码，粘到聊天窗口经常断。每个目录 README 的第一行就是中文名，两边对照着看不会跟丢：
+
+| 目录 | 中文名 |
+|---|---|
+| `docs/` | 方法正文 |
+| `samples/01-scene-cases/` | 场景用例库与检查项框架 |
+| `samples/02-weak-network/` | 弱网与断线重连专项 |
+| `samples/03-system-modules/` | 系统模块测试点 |
+| `samples/04-map-design/` | 地图设计测试点 |
+| `templates/` | 缺陷单与用例表模板 |
+
+命名规则、提交信息格式、什么东西不能进仓库，都在 [CONTRIBUTING.md](CONTRIBUTING.md)。
+
 ## 写法约定
 
 每篇都按同一个结构，缺一段就算没写完：

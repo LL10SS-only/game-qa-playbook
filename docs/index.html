@@ -341,7 +341,7 @@
         </tr>
         <tr>
           <td><a href="https://github.com/LL10SS-only/game-qa-playbook/tree/main/samples/02-weak-network">02-weak-network</a></td>
-          <td>九档网络下的允许范围、提单优先级与修复标准，外加断线重连的十种时机；执行矩阵的列头就是网络档位</td>
+          <td>九档网络下的允许范围、提单优先级与修复标准，外加断线重连的四类时机；执行矩阵的列头就是网络档位</td>
           <td class="m">9 表 / 1146 行</td>
         </tr>
         <tr>
@@ -374,7 +374,7 @@
       </li>
       <li>
         <h3><i>②</i>给「什么算 bug」定标准，而不只是按标准执行</h3>
-        <p>弱网专项里定过 9 档网络条件 × 5 类场景的允许范围：同一档网络下，大厅卡一下无所谓，局内卡一下就是事故。没有这张表，评审会退化成「我觉得卡了」对「这网络本来就该卡」。</p>
+        <p>弱网专项里定过 9 档网络条件 × 6 类场景的允许范围：同一档网络下，大厅卡一下无所谓，局内卡一下就是事故。没有这张表，评审会退化成「我觉得卡了」对「这网络本来就该卡」。</p>
         <p class="ev"><b>证据</b><a href="https://github.com/LL10SS-only/game-qa-playbook/blob/main/samples/02-weak-network/severity-standard.md">弱网提级标准</a> · 9 个工作表 / 1146 行用例</p>
       </li>
       <li>
@@ -430,7 +430,7 @@
         <p>只覆盖 PC 端。移动端还要叠加 WiFi↔4G 切换、信号强度变化、系统省电策略，这三类在 PC 上不存在，我还没系统做过。</p>
         <p>工具造出来的弱网是稳定的延迟和丢包，真实弱网是抖动、突发、上下行不对称。这套标准能覆盖「持续劣化」，覆盖不了「瞬间抖动」—— 后者得靠线上监控。</p>
       </div>
-      <p class="more"><a href="https://github.com/LL10SS-only/game-qa-playbook/blob/main/samples/02-weak-network/severity-standard.md">完整标准：九档网络 + 五类场景矩阵 + 十种断线时机 →</a></p>
+      <p class="more"><a href="https://github.com/LL10SS-only/game-qa-playbook/blob/main/samples/02-weak-network/severity-standard.md">完整标准：九档网络 + 六类场景矩阵 + 四类断线时机 →</a></p>
     </article>
 
     <article class="drill">
