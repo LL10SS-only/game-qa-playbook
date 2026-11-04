@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>徐子山 · 游戏测试作品集</title>
+<meta name="description" content="14 个月游戏测试经验。场景模块用例库、弱网与断线重连专项标准、配置表校验工具。含规模统计、判断依据与未覆盖的边界。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="徐子山 · 游戏测试作品集">
+<meta property="og:description" content="一页简历放不下判断的过程。这里放的是：五类测试资产、三份深读、以及我还没做好的部分。">
+<meta property="og:url" content="https://ll10ss-only.github.io/game-qa-playbook/">
+<link rel="canonical" href="https://ll10ss-only.github.io/game-qa-playbook/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAF8F4'/%3E%3Crect x='4' y='4' width='24' height='24' fill='none' stroke='%230B4791' stroke-width='2'/%3E%3Ctext x='16' y='22' font-size='14' text-anchor='middle' fill='%230B4791' font-family='serif'%3E徐%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --paper:#FAF8F4;
+    --ink:#15140F;
+    --body:#2B2A25;
+    --muted:#7A756B;
+    --rule:#DCD6C9;
+    --hair:#E7E2D6;
+    --accent:#0B4791;
+    --rust:#9A4B22;
+    --sans:"PingFang SC","Microsoft YaHei","Hiragino Sans GB","Source Han Sans SC","Noto Sans CJK SC",sans-serif;
+    --mono:ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+    --serif:Georgia,"Songti SC","Source Han Serif SC","Noto Serif SC","SimSun",serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--paper);color:var(--body);
+    font-family:var(--sans);font-size:15.5px;line-height:1.88;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:804px;margin:0 auto;padding:58px 30px 72px}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(11,71,145,.28)}
+  a:hover{border-bottom-color:var(--accent)}
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  p{margin:0 0 15px}
+  strong{font-weight:700;color:var(--ink)}
+
+  /* ---- 页头 ---- */
+  .kicker{
+    font:600 11px/1 var(--mono);letter-spacing:.2em;color:var(--muted);
+    display:flex;align-items:center;gap:10px;margin-bottom:22px;
+  }
+  .kicker::before{content:"";width:7px;height:7px;background:var(--accent);display:block}
+  h1{
+    margin:0 0 6px;font-size:46px;line-height:1.15;font-weight:700;
+    color:var(--ink);letter-spacing:.14em;
+  }
+  .role{margin:0 0 26px;font-size:14px;color:var(--muted);letter-spacing:.02em}
+  .role em{font-style:normal;color:var(--body)}
+  .sep{color:#C4BEAF;padding:0 8px}
+  .lede{font-size:15.5px;color:var(--body);margin-bottom:13px}
+  .lede:last-of-type{margin-bottom:0}
+
+  /* ---- 数据条 ---- */
+  .stats{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
+    margin:38px 0 0;
+  }
+  .stat{padding:17px 16px 15px;border-left:1px solid var(--hair)}
+  .stat:first-child{border-left:0;padding-left:0}
+  .stat b{display:block;font:500 27px/1.15 var(--mono);color:var(--ink);letter-spacing:-.01em}
+  .stat b small{font-size:13px;font-weight:400;color:var(--body);margin-left:2px;letter-spacing:0}
+  .stat span{display:block;margin-top:7px;font-size:11.5px;line-height:1.55;color:var(--muted)}
+  .fine{font-size:11.5px;color:var(--muted);line-height:1.7;margin:10px 0 0}
+  .fine b{font-weight:600;color:#5F5A50}
+
+  /* ---- 章节 ---- */
+  section{margin-top:58px}
+  h2{
+    margin:0 0 20px;padding-top:15px;border-top:1.5px solid var(--ink);
+    font-size:21px;line-height:1.4;font-weight:700;color:var(--ink);
+    letter-spacing:.05em;display:flex;align-items:baseline;gap:13px;
+  }
+  h2 .num{font:600 11px/1 var(--mono);letter-spacing:.1em;color:var(--accent)}
+  h2 .en{font:400 11px/1 var(--mono);letter-spacing:.16em;color:#B3ADA0;margin-left:auto}
+
+  /* ---- 阅读路径 ---- */
+  ol.route{list-style:none;margin:0;padding:0}
+  ol.route li{
+    display:grid;grid-template-columns:78px 1fr;gap:18px;
+    padding:16px 0;border-top:1px solid var(--hair);
+  }
+  ol.route li:first-child{border-top:0;padding-top:2px}
+  ol.route .t{font:500 12px/1.7 var(--mono);color:var(--muted);letter-spacing:.02em}
+  ol.route .t em{display:block;font-style:normal;color:#B3ADA0;font-size:11px}
+  ol.route h3{margin:0 0 5px;font-size:15.5px;font-weight:700;color:var(--ink);letter-spacing:.02em}
+  ol.route p{margin:0;font-size:14.5px;line-height:1.8}
+
+  /* ---- 仓库结构 ---- */
+  .tree-wrap{margin-top:26px;padding:16px 0 4px;border-top:1px solid var(--hair)}
+  .tree-wrap .lbl{
+    font:600 10.5px/1 var(--mono);letter-spacing:.16em;color:var(--muted);margin-bottom:12px;
+  }
+  ul.tree{list-style:none;margin:0;padding:0}
+  ul.tree li{
+    display:grid;grid-template-columns:196px 1fr;gap:0 12px;align-items:baseline;
+    font-size:12.8px;line-height:1.98;color:var(--muted);
+  }
+  ul.tree .p{
+    font:400 12.3px/1.98 var(--mono);color:#3A3830;white-space:nowrap;
+  }
+  ul.tree .p::before{content:"├── ";color:#C0B9A8;letter-spacing:-.04em}
+  ul.tree li.last .p::before{content:"└── "}
+  ul.tree li.root .p::before{content:""}
+  ul.tree li.root .p{color:var(--ink);font-weight:600}
+  ul.tree li.d2{padding-left:1.6em}
+  ul.tree li.sep{margin-top:10px}
+
+  /* ---- 能力 ---- */
+  ul.caps{list-style:none;margin:0;padding:0}
+  ul.caps li{
+    padding:17px 0 17px 34px;border-top:1px solid var(--hair);
+    position:relative;
+  }
+  ul.caps li:first-child{border-top:0;padding-top:2px}
+  ul.caps h3{margin:0 0 5px;font-size:15.5px;font-weight:700;color:var(--ink);letter-spacing:.02em;line-height:1.65}
+  ul.caps h3 i{
+    position:absolute;left:0;top:19px;font-style:normal;
+    font:400 14px/1 var(--sans);color:rgba(154,75,34,.8);
+  }
+  ul.caps li:first-child h3 i{top:4px}
+  ul.caps p{margin:0;font-size:14.5px;line-height:1.82}
+  .ev{font-size:12.5px;color:var(--muted);letter-spacing:.01em;margin-top:5px!important}
+  .ev b{font:600 10.5px/1 var(--mono);letter-spacing:.14em;color:#B3ADA0;margin-right:7px}
+
+  /* ---- 深读 ---- */
+  .drill{margin-top:38px;padding-top:20px;border-top:1px solid var(--hair)}
+  .drill:first-of-type{margin-top:14px;padding-top:0;border-top:0}
+  .eyebrow{
+    font:600 11px/1 var(--mono);letter-spacing:.16em;color:var(--rust);
+    margin-bottom:10px;display:flex;gap:7px;align-items:center;
+  }
+  .eyebrow i{font-style:normal;font-size:14px;font-family:var(--sans);letter-spacing:0;vertical-align:-1px}
+  .eyebrow s{text-decoration:none;color:#CFC7B6}
+  .drill h3{margin:0 0 11px;font-size:18.5px;font-weight:700;color:var(--ink);line-height:1.6;letter-spacing:.02em}
+  .drill p{font-size:14.8px}
+  .drill p.lead{color:#3A3830}
+
+  blockquote{
+    margin:22px 0;padding:2px 0 2px 18px;border-left:2px solid var(--rule);
+    font-family:var(--serif);font-size:17px;line-height:1.95;color:#2A2924;
+  }
+  blockquote p:last-child{margin-bottom:0}
+
+  table{width:100%;border-collapse:collapse;margin:20px 0 8px;font-size:13.2px;line-height:1.7}
+  caption{caption-side:top;text-align:left;font:500 11px/1.6 var(--mono);letter-spacing:.08em;color:#B3ADA0;padding-bottom:8px}
+  th{
+    text-align:left;font-weight:600;font-size:11.5px;letter-spacing:.05em;color:var(--muted);
+    padding:0 10px 8px;border-bottom:1px solid #C9C3B4;white-space:nowrap;
+  }
+  td{padding:9px 10px;border-bottom:1px solid var(--hair);vertical-align:top}
+  th:first-child,td:first-child{padding-left:0}
+  td.m{font-family:var(--mono);font-size:12.4px;color:#3A3830;white-space:nowrap}
+  tr.hi td{background:#F3EFE4}
+  tr.hi td:first-child{box-shadow:inset 2px 0 0 var(--rust)}
+  .tnote{font-size:12.4px;line-height:1.75;color:var(--muted);margin:0 0 22px}
+  table.assets{margin-top:30px;table-layout:fixed}
+  table.assets th:first-child,table.assets td:first-child{width:152px}
+  table.assets th:last-child,table.assets td:last-child{width:164px;text-align:right}
+  table.assets td:first-child a{font:400 12.4px/1.6 var(--mono);white-space:nowrap;border-bottom-color:rgba(11,71,145,.22)}
+  table.assets td:nth-child(2){font-size:13.6px;line-height:1.75;padding-right:26px}
+  table.assets td:last-child{white-space:nowrap;color:var(--muted);font-size:12px}
+
+  pre{
+    margin:22px 0;padding:16px 19px 15px;
+    background:#F4F0E5;color:#33312B;
+    border:1px solid #E4DDCA;border-left:3px solid #C6BCA2;
+    font:12.4px/1.82 var(--mono);overflow-x:auto;
+  }
+  pre .c{color:#8B8474}
+  pre .k{color:#2E6B3E}
+  pre .n{color:#8A5A1E}
+  pre .r{color:#A33B26;font-weight:600}
+  /* 终端输出的摘要列：中英混排在等宽字体里对不齐，用固定宽度钉住 */
+  pre .ln{display:block}
+  pre .w1{display:inline-block;width:5.2em}
+  pre .w2{display:inline-block;width:2.2em;text-align:right}
+  pre .w3{display:inline-block;width:3em}
+  .m{font-family:var(--mono);font-size:.93em;letter-spacing:-.01em}
+
+  .note-limit{margin:22px 0 0;padding:1px 0 1px 16px;border-left:2px solid var(--rust)}
+  .note-limit b{
+    display:block;font:600 10.5px/1 var(--mono);letter-spacing:.16em;
+    color:var(--rust);margin-bottom:6px;
+  }
+  .note-limit p{font-size:13.4px;line-height:1.8;color:#4A463D;margin:0 0 8px}
+  .note-limit p:last-child{margin-bottom:0}
+
+  .more{font-size:12.8px;color:var(--muted);margin-top:14px}
+
+  /* ---- 缺口 ---- */
+  ul.gaps{list-style:none;margin:0;padding:0;counter-reset:g}
+  ul.gaps li{
+    position:relative;padding:13px 0 13px 30px;border-top:1px solid var(--hair);
+    font-size:14.5px;line-height:1.82;
+  }
+  ul.gaps li:first-child{border-top:0;padding-top:2px}
+  ul.gaps li::before{
+    counter-increment:g;content:counter(g);
+    position:absolute;left:0;top:15px;
+    font:500 10.5px/1 var(--mono);color:#B3ADA0;
+  }
+  ul.gaps li:first-child::before{top:4px}
+  ul.gaps b{color:var(--ink)}
+
+  /* ---- 脱敏 ---- */
+  .stamp{
+    display:inline-block;margin:6px 0 20px;transform:rotate(-3.2deg);
+    border:2px solid rgba(154,75,34,.42);color:rgba(154,75,34,.88);
+    box-shadow:inset 0 0 0 2px var(--paper),inset 0 0 0 3px rgba(154,75,34,.18);
+    padding:9px 15px;font:600 11.5px/1.4 var(--mono);letter-spacing:.16em;
+    background:transparent;
+  }
+  ul.plain{list-style:none;margin:0;padding:0}
+  ul.plain li{position:relative;padding-left:17px;margin-bottom:9px;font-size:14.5px;line-height:1.8}
+  ul.plain li::before{content:"—";position:absolute;left:0;color:#C4BEAF}
+
+  /* ---- 页脚 ---- */
+  footer{
+    margin-top:60px;padding-top:16px;border-top:1.5px solid var(--ink);
+    display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;
+    font-size:12.8px;color:var(--muted);line-height:1.85;
+  }
+  footer .who{font-weight:700;color:var(--ink);font-size:13.5px;letter-spacing:.06em}
+  footer .r{text-align:right}
+  footer a{border-bottom-color:rgba(11,71,145,.28)}
+
+  @media (max-width:640px){
+    .wrap{padding:40px 22px 56px}
+    h1{font-size:36px}
+    .role em{display:block;margin-top:3px}
+    .role .sep{display:none}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .stat:nth-child(3){border-left:0;padding-left:0}
+    .stat{border-top:1px solid var(--hair);padding-left:14px}
+    .stat:nth-child(-n+2){border-top:0}
+    ol.route li{grid-template-columns:64px 1fr;gap:12px}
+    ul.tree li{grid-template-columns:1fr;gap:0;line-height:1.7}
+    ul.tree .p{font-size:12.4px;padding-top:9px}
+    ul.tree .p::before,.ul.tree li.last .p::before{content:""}
+    ul.tree li.d2{padding-left:1.4em}
+    ul.tree li span:last-child{font-size:12.2px;padding-left:0;margin-bottom:3px;line-height:1.75}
+    table{font-size:12.4px;line-height:1.65}
+    th,td{padding:8px 7px}
+    pre{font-size:11.4px;padding:14px 14px 13px}
+    h2 .en{display:none}
+    footer{flex-direction:column;gap:10px}
+    footer .r{text-align:left}
+  }
+  @media print{
+    body{background:#fff;font-size:10.5pt}
+    .wrap{max-width:none;padding:0}
+    a{color:#0B4791;border-bottom:none}
+    pre{background:#F5F2EA;color:#222;border:1px solid #DDD7C9}
+    pre .c,pre .k,pre .n,pre .r{color:#333}
+    .drill,.note-limit,table,pre{break-inside:avoid}
+    section{break-inside:auto}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">游戏测试 · 作品集</div>
+    <h1>徐 子 山</h1>
+    <p class="role">游戏测试工程师 · 深圳<span class="sep">/</span><em>外包驻场腾讯天美《三角洲行动》场景模块</em></p>
+
+    <p class="lede">简历只有一页，一页放不下判断的过程，所以有了这个站。</p>
+    <p class="lede">我做游戏测试 14 个月。前 10 个月在一款在研搜打撤端游做玩法模块，从用例写起，一直跟到版本验收；之后驻场天美做《三角洲行动》的场景模块，地形、掩体、碰撞、通行这些。</p>
+    <p class="lede">一年多真正留下来的，不是「测过多少功能」，而是几套能反复用的判断：什么现象算 bug、一个偶现问题该记哪些条件、一个新系统该从哪几刀切。下面把它们摊开，包括我还没做好的部分。</p>
+  </header>
+
+  <div class="stats">
+    <div class="stat"><b>14<small>个月</small></b><span>游戏测试经验<br>含 10 个月驻场实习</span></div>
+    <div class="stat"><b>1266<small>条</small></b><span>提交缺陷<br>两个项目合计</span></div>
+    <div class="stat"><b>854<small>条</small></b><span>单个场景模块<br>的用例库</span></div>
+    <div class="stat"><b>10678<small>个</small></b><span>测试点脑图节点<br>五类资产合计</span></div>
+  </div>
+  <p class="fine"><b>关于这些数字：</b>缺陷数取自缺陷系统导出，节点数由脑图文件的每个节点逐个解析得出，不是估算。样本已脱敏，原始文件未公开，原因写在 <a href="#s5">05</a>。</p>
+
+  <section id="s1">
+    <h2><span class="num">01</span>这份作品集怎么看<span class="en">READING PATH</span></h2>
+    <p>三分钟看结论，十分钟看方法。想验证我说的对不对，再点证据 —— 每条都指回原文。</p>
+
+    <ol class="route">
+      <li>
+        <div class="t">3 分钟<em>就在这页</em></div>
+        <div>
+          <h3>先看五条能力和三份深读</h3>
+          <p>能力是结论，深读是结论怎么来的。如果你只想判断「这人能不能干活」，看完 03 的前两段就够。</p>
+        </div>
+      </li>
+      <li>
+        <div class="t">10 分钟<em>两篇正文</em></div>
+        <div>
+          <h3><a href="https://github.com/LL10SS-only/game-qa-playbook/blob/main/docs/01-test-case-design.md">从需求到用例</a> ／ <a href="https://github.com/LL10SS-only/game-qa-playbook/blob/main/docs/02-bug-reproduction-and-triage.md">偶现缺陷</a></h3>
+          <p>前一篇讲写用例之前怎么先想清楚要测什么；后一篇讲一个三次才复现一次的 bug，条件怎么记、级怎么定、归属怎么判。两篇都按「结论先行 → 一个例子 → 局限」写。</p>
+        </div>
+      </li>
+      <li>
+        <div class="t">看情况<em>验真</em></div>
+        <div>
+          <h3><a href="https://github.com/LL10SS-only/game-qa-playbook/tree/main/samples">样本五类</a> ／ <a href="https://github.com/LL10SS-only/config-table-testkit">一个能跑的工具</a></h3>
+          <p>样本给的是规模、结构和可摘录的片段。工具可以直接 clone 下来 <span class="m">pytest</span>，12 个测试都过才算数。</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="tree-wrap">
+      <div class="lbl">仓库结构</div>
+      <ul class="tree">
+        <li class="root"><span class="p">game-qa-playbook/</span><span>方法 + 样本，主线在这里</span></li>
+        <li class="d1"><span class="p">docs/</span><span>两篇方法正文</span></li>
+        <li class="d1"><span class="p">samples/</span><span>五类测试资产，每个目录一份 README</span></li>
+        <li class="d2"><span class="p">01-scene-cases/</span><span>场景模块用例库 + 检查项框架</span></li>
+        <li class="d2"><span class="p">02-weak-network/</span><span>弱网与断线重连专项</span></li>
+        <li class="d2"><span class="p">03-system-modules/</span><span>系统级测试点脑图</span></li>
+        <li class="d2"><span class="p">04-map-design/</span><span>地图玩法的测试点框架</span></li>
+        <li class="d2 last"><span class="p">05-desensitization.md</span><span>脱敏口径说明</span></li>
+        <li class="d1 last"><span class="p">templates/</span><span>缺陷单、用例表</span></li>
+        <li class="sep root"><span class="p">config-table-testkit/</span><span>独立仓库：配置表校验工具</span></li>
+      </ul>
+    </div>
+
+    <table class="assets">
+      <caption>五类资产一览 · 点目录进对应页</caption>
+      <thead>
+        <tr><th>目录</th><th>是什么</th><th>规模</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://github.com/LL10SS-only/game-qa-playbook/tree/main/samples/01-scene-cases">01-scene-cases</a></td>
+          <td>一个场景模块的全量用例，配一套 15 类的检查项框架；框架管「想到哪些面」，用例管「每面测到什么程度」</td>
+          <td class="m">854 条 / 6013 节点</td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/LL10SS-only/game-qa-playbook/tree/main/samples/02-weak-network">02-weak-network</a></td>
+          <td>九档网络下的允许范围、提单优先级与修复标准，外加断线重连的十种时机；执行矩阵的列头就是网络档位</td>
+          <td class="m">9 表 / 1146 行</td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/LL10SS-only/game-qa-playbook/tree/main/samples/03-system-modules">03-system-modules</a></td>
+          <td>五张系统级测试点脑图，统一四段式：文档与干系人 → 功能逐项 → 交叉与异常 → 收尾</td>
+          <td class="m">3881 节点</td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/LL10SS-only/game-qa-playbook/blob/main/samples/04-map-design/test-point-framework.md">04-map-design</a></td>
+          <td>地图类玩法的测试拆解框架，从 POI 体系、动线、填充要素一路到交叉平衡与异常性能</td>
+          <td class="m">9 章 / 33 节</td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/LL10SS-only/game-qa-playbook/blob/main/samples/05-desensitization.md">05-desensitization</a></td>
+          <td>对外分享前做了什么处理，以及哪些内容即使脱敏也不该公开</td>
+          <td class="m">413 处替换 / 63 图</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="s2">
+    <h2><span class="num">02</span>我能做什么<span class="en">CAPABILITIES</span></h2>
+
+    <ul class="caps">
+      <li>
+        <h3><i>①</i>把一段需求拆成用例，并且知道自己哪没覆盖</h3>
+        <p>先按判定体定边界，再拆状态迁移，最后找经济闭环的断点。顺序反了，写出来的用例会又长又漏。一个场景模块我写过 854 条，P0 只有 47 条 —— 数量不是重点，重点是能说清那 47 条为什么是 P0。</p>
+        <p class="ev"><b>证据</b><a href="https://github.com/LL10SS-only/game-qa-playbook/tree/main/samples/01-scene-cases">samples/01 场景模块用例</a> · <a href="https://github.com/LL10SS-only/game-qa-playbook/blob/main/docs/01-test-case-design.md">01 篇正文</a></p>
+      </li>
+      <li>
+        <h3><i>②</i>给「什么算 bug」定标准，而不只是按标准执行</h3>
+        <p>弱网专项里定过 9 档网络条件 × 5 类场景的允许范围：同一档网络下，大厅卡一下无所谓，局内卡一下就是事故。没有这张表，评审会退化成「我觉得卡了」对「这网络本来就该卡」。</p>
+        <p class="ev"><b>证据</b><a href="https://github.com/LL10SS-only/game-qa-playbook/blob/main/samples/02-weak-network/severity-standard.md">弱网提级标准</a> · 9 个工作表 / 1146 行用例</p>
+      </li>
+      <li>
+        <h3><i>③</i>定位，而不是提完单就结束</h3>
+        <p>一个复现率三分之一的 bug，值钱的不是「偶现」两个字，是条件写到别人也能复现。我的做法是把它拆成版本、设备、配置、数据四个二分，一次排掉一半可能，再去看日志和库里的实际值。</p>
+        <p class="ev"><b>证据</b><a href="https://github.com/LL10SS-only/game-qa-playbook/blob/main/docs/02-bug-reproduction-and-triage.md">02 篇正文</a> · <a href="https://github.com/LL10SS-only/game-qa-playbook/blob/main/templates/bug-report.md">缺陷单模板</a></p>
+      </li>
+      <li>
+        <h3><i>④</i>把重复劳动写成脚本</h3>
+        <p>配置表的规则明确、组合极多、人眼查不完，所以它的正确形态是脚本不是用例。六类规则、JSON 声明式配置，输出精确到 Excel 物理行号的清单，退出码能直接挂到提交前做门禁。</p>
+        <p class="ev"><b>证据</b><a href="https://github.com/LL10SS-only/config-table-testkit">config-table-testkit</a> · 8 个埋点全部命中，12 个测试逐条断言行号</p>
+      </li>
+      <li>
+        <h3><i>⑤</i>知道什么东西不能带出门</h3>
+        <p>这份作品集里的每个数字都来自真实项目，但没有一份原始文件被公开。做这件事花的工夫不比写文档少：413 处替换、63 张截图重绘，还要判断哪些是「我的作品」、哪些属于「项目资产」。</p>
+        <p class="ev"><b>证据</b><a href="https://github.com/LL10SS-only/game-qa-playbook/blob/main/samples/05-desensitization.md">05 脱敏口径</a> · 413 处替换 / 63 张图</p>
+      </li>
+    </ul>
+  </section>
+
+  <section id="s3">
+    <h2><span class="num">03</span>三份深读<span class="en">IN DEPTH</span></h2>
+    <p>这三份能代表我做事的方式：先把判断依据写下来，再动手；写不下去的地方，就是还没学会的地方。</p>
+
+    <article class="drill">
+      <div class="eyebrow"><i>①</i>深读<s>/</s>弱网与断线重连专项</div>
+      <h3>先定「什么算 bug」，再谈测没测</h3>
+      <p class="lead">很多人说「我做过弱网测试」，指的是在 2G、3G 下跑了一遍流程。但真正难的不是造网络，是在某个网络条件下，一个卡顿到底该不该提单、该提几级。这个问题不定，测试报告就没法写。</p>
+
+      <table>
+        <caption>摘自 samples/02 的九档网络表（节选四档）</caption>
+        <thead>
+          <tr><th>代号</th><th>网络条件</th><th>修复标准</th><th>优先级底线</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="m">N1</td><td>WiFi ↔ 移动网络切换</td><td>必修</td><td>高</td></tr>
+          <tr class="hi"><td class="m">N4</td><td>延迟 200ms + 丢包 5%<br><strong>基线档</strong></td><td>必修</td><td>高</td></tr>
+          <tr><td class="m">N6</td><td>延迟 300ms + 丢包 20%</td><td>必修</td><td>中及以上</td></tr>
+          <tr><td class="m">N9</td><td>丢包 100%（完全不通）</td><td>不强保</td><td>中及以下</td></tr>
+        </tbody>
+      </table>
+      <p class="tnote">表注：「必修」＝ 该档网络下必须达到修复标准；「不强保」＝ 不强制要求表现，能给提示、能从异常状态恢复到可用即可。</p>
+
+      <p>三个当时被质疑过的判断，现在看还是对的：</p>
+      <ul class="plain">
+        <li><strong>基线选 N4，不选 N3。</strong>N3 接近理想网络，在上面测出来的问题玩家根本碰不到；N4 是「地铁里刷手机」的水平，才是真实的下限。基线定高了，等于自己给自己减工作量。</li>
+        <li><strong>断开 66 秒后重连才是 T0，「断开立即重连」只是 T1。</strong>反直觉，但超时之后客户端已经走完「判定离线 → 退出房间 → 回大厅」，恢复要跨的状态最多，也最容易留下重复道具这类脏数据。</li>
+        <li><strong>游戏币消费从 N4 起就写「不得重复交易」。</strong>这不属于网络表现，是幂等。弱网下玩家会下意识连点，连点必然重复请求，所以这条不是顺便测一下，是从基线档就进标准的硬要求。</li>
+      </ul>
+
+      <div class="note-limit">
+        <b>局限</b>
+        <p>只覆盖 PC 端。移动端还要叠加 WiFi↔4G 切换、信号强度变化、系统省电策略，这三类在 PC 上不存在，我还没系统做过。</p>
+        <p>工具造出来的弱网是稳定的延迟和丢包，真实弱网是抖动、突发、上下行不对称。这套标准能覆盖「持续劣化」，覆盖不了「瞬间抖动」—— 后者得靠线上监控。</p>
+      </div>
+      <p class="more"><a href="https://github.com/LL10SS-only/game-qa-playbook/blob/main/samples/02-weak-network/severity-standard.md">完整标准：九档网络 + 五类场景矩阵 + 十种断线时机 →</a></p>
+    </article>
+
+    <article class="drill">
+      <div class="eyebrow"><i>②</i>深读<s>/</s>场景模块用例库</div>
+      <h3>同一件事写成四条，比写一条加备注可靠</h3>
+      <p class="lead">854 条用例里，有相当一部分同名。这不是重复，是刻意的组织方式 —— 同一个检查点在步行、载具、地图边界、正常游玩四种状态下表现不同，写成四条，执行的人不会漏看备注。</p>
+
+      <table>
+        <caption>原文未改，摘自 samples/01</caption>
+        <thead>
+          <tr><th>用例名</th><th>前置条件</th><th>预期结果</th><th>优先级</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>空气墙碰撞检查</td><td>已进入游戏场景</td><td>透明不可见，不影响游玩视野</td><td class="m">P0</td></tr>
+          <tr><td>空气墙碰撞检查</td><td>处于地图边界附近</td><td>能挡住玩家，无法进入非正常区域</td><td class="m">P0</td></tr>
+          <tr><td>空气墙碰撞检查</td><td>已驾驶载具</td><td>无法穿过，可阻挡载具通行</td><td class="m">P0</td></tr>
+          <tr><td>空气墙碰撞检查</td><td>正常进入对局</td><td>是透明不可见</td><td class="m">P1</td></tr>
+        </tbody>
+      </table>
+
+      <p>还有一处取舍值得说：预期结果写「是透明不可见」和写「透明不可见，不影响正常游玩视野」是两种质量，后者能抓到「透了但挡视野」这种真问题。但全库都这么写，执行时判据会发散 —— 每个人对「不影响视野」的理解不一样。</p>
+      <p>所以实际做法是 <strong>P0 判据闭环，P1/P2 写短</strong>。P0 是发布门禁，判据必须能判定通过与否；P1/P2 要的是覆盖率，判据留一点弹性反而跑得快。</p>
+
+      <blockquote><p>6013 ÷ 7 ≈ 859，和 854 对得上 —— 每条用例固定占 7 个节点（用例名 + 6 个字段）。结构这么齐，脑图可以直接转成表格，不用人工二次整理。</p></blockquote>
+
+      <div class="note-limit">
+        <b>局限</b>
+        <p>盖不住三类：多人并发下的状态竞争、数值平衡、长时间运行的累积问题。前两类分别在专项和数值侧，第三类属于稳定性测试。</p>
+        <p>如果没人接这三块，正确做法是在测试报告里写明「未覆盖」和由谁补。含糊过去，最后是玩家替你发现问题。</p>
+      </div>
+      <p class="more"><a href="https://github.com/LL10SS-only/game-qa-playbook/tree/main/samples/01-scene-cases">完整样本：854 条用例的字段结构与 15 类检查项 →</a></p>
+    </article>
+
+    <article class="drill">
+      <div class="eyebrow"><i>③</i>深读<s>/</s>配置表校验工具</div>
+      <h3>把「肉眼对表」变成一条命令</h3>
+      <p class="lead">配置表是游戏里最容易出低级错误、又最难被功能测试覆盖的地方。掉落表引用了一个已删除的道具 ID，线上表现是掉落物显示空白图标但仍可拾取；商店表价格填成负数，玩家能反向刷钱。这类问题的共同点是规则明确、组合极多、人眼查不完。</p>
+
+      <pre><span class="c">$ python -m configkit --schema schemas/tables.json --out reports/issues.csv</span>
+校验完成：<span class="n">3</span> 张表 / <span class="n">28</span> 行数据 / 命中 <span class="r">8</span> 条问题
+
+<span class="ln"><span class="w1">道具表</span><span class="w2">13</span><span class="w3">行</span>问题 <span class="n">4</span> 条</span><span class="ln"><span class="w1">掉落表</span><span class="w2">10</span><span class="w3">行</span>问题 <span class="n">3</span> 条</span><span class="ln"><span class="w1">商店表</span><span class="w2">5</span><span class="w3">行</span>问题 <span class="n">1</span> 条</span>
+
+  <span class="k">1.</span> [道具表] 第 7 行 price 数值越界：不得小于 1（实际值 -90）
+  <span class="k">2.</span> [道具表] 第 14 行 item_id 主键重复：与第 4 行冲突（实际值 3）
+  <span class="k">3.</span> [掉落表] 第 8 行 weight 分组合计不符：应为 100，group=epic 实际 110
+  <span class="k">4.</span> [掉落表] 第 9 行 item_id 引用不存在：在道具表中不存在（实际值 98）</pre>
+
+      <p>四个决定，都是被具体问题逼出来的：</p>
+      <ul class="plain">
+        <li><strong>不用 pandas。</strong>报告最终要交给策划定位，行号必须是 Excel 里的物理行号。pandas 读完会重置索引，反而要多维护一层映射；openpyxl 直接给物理行号，依赖也更少。</li>
+        <li><strong>规则写进 JSON，不写进代码。</strong>每张表的字段和约束差别很大，如果每条规则都是一段 if，加一张表就得改一次代码。现在加表只加配置。</li>
+        <li><strong>必填为空只报一次。</strong>一个空格子同时报 required 和 type，策划看到两条问题，下次就不信这份报告了。</li>
+        <li><strong>退出码分四种。</strong>0 通过、1 有问题、2 规则文件缺失、3 表读不了。有语义才能当门禁用。</li>
+      </ul>
+
+      <div class="note-limit">
+        <b>不覆盖</b>
+        <p>不判断数值本身合不合理 —— 某道具定价 9000 是否平衡是策划的判断，工具只保证「不违反已声明的规则」。不支持 .xls 旧格式，只读第一个 sheet，也不做版本间 diff。</p>
+      </div>
+      <p class="more"><a href="https://github.com/LL10SS-only/config-table-testkit">仓库：config-table-testkit（含 3 张虚构配置表，8 个埋点）→</a></p>
+    </article>
+  </section>
+
+  <section id="s4">
+    <h2><span class="num">04</span>还差什么<span class="en">STILL MISSING</span></h2>
+    <p>写在这里，是因为面试迟早会问到，与其被问出来，不如我先说。</p>
+    <ul class="gaps">
+      <li><b>回归范围那篇还没写。</b>README 里挂着「计划中」，我没有建空文件充数。冒烟、核心、全量三级怎么划，我心里有答案，但还没写成能交给别人执行的判据 —— 写不成判据的东西，等于只有我自己会用。</li>
+      <li><b>自动化停在脚本级。</b>没有接 CI，没有设备农场。Airtest 那套跑过小规模冒烟，一套脚本在真实项目里跑一百遍会暴露多少不稳定，我知道大概数，但没真正解决。</li>
+      <li><b>弱网只做了 PC。</b>移动端的三类差异（网络切换、信号强度、省电策略）我还没系统覆盖，这是下一个要补的口子。</li>
+      <li><b>性能只到采集和横向对比。</b>帧耗时、Jank 占比、降频曲线会看，也能控制机型、画质、起始电量让数据可比；但归因到具体渲染管线还是弱。</li>
+      <li><b>数值平衡不测。</b>这条不是短板，是分工。测试能给数据，判断归策划 —— 我不假装能做这件事。</li>
+    </ul>
+  </section>
+
+  <section id="s5">
+    <h2><span class="num">05</span>关于脱敏<span class="en">ON REDACTION</span></h2>
+    <div class="stamp">样本已脱敏 · 不含公司资产</div>
+    <p>这个站上的每个数字都来自真实项目，但原始文件一份都没公开。原因按重要性排：</p>
+    <ul class="plain">
+      <li><strong>原始文件含未公开内容。</strong>我处理掉了人名、内网链接、需求号、版本代号和截图，但玩法机制、系统结构、数值口径本身还在 —— 这些属于项目，不属于我。</li>
+      <li><strong>打开成本太高。</strong>.xmind 要装 XMind，.xlsx 要下载才能看。招聘方不会为了看一份作品集去装软件。</li>
+      <li><strong>图片证据已经不在了。</strong>脑图里 63 张游戏截图在脱敏时重绘成灰块，留下文件只剩树形文本，那用 Markdown 写反而更清楚。</li>
+    </ul>
+    <p>所以这里的做法是：把结构、规模、判断依据写出来，把内容留在该留的地方。面试的时候我可以现场打开原始文件，一层一层讲给你听。</p>
+    <p class="fine"><b>另：</b>页面上的表结构、道具 ID、数值全部是自造的，与任何在研或在运营项目无关。</p>
+  </section>
+
+  <footer>
+    <div>
+      <div class="who">徐子山 · 游戏测试工程师</div>
+      在找深圳的游戏测试岗位，甲方或中型厂都看。<br>
+      到岗时间一个月内。
+    </div>
+    <div class="r">
+      <a href="mailto:1841135054@qq.com">1841135054@qq.com</a><br>
+      <a href="https://github.com/LL10SS-only" rel="me">github.com/LL10SS-only</a><br>
+      本页最后更新 2026-11-04
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
