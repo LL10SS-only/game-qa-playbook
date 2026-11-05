@@ -16,6 +16,7 @@
 |---|---|
 | [01 从需求到用例：场景类玩法的拆解顺序](docs/01-test-case-design.md) | 拿到一段需求，怎么在动笔写用例之前先想清楚要测什么 |
 | [02 偶现缺陷：从 1/3 复现率到根因](docs/02-bug-reproduction-and-triage.md) | 一个三次才复现一次的 bug，怎么记、怎么定级、怎么判归属 |
+| [03 回归范围怎么定：三次发版决策](docs/03-regression-scope.md) | 冒烟、核心、全量各回答什么问题，什么时候可以不做全量，以及规则管不到的那一类问题 |
 
 ## 样本
 
@@ -34,19 +35,17 @@
 - [缺陷单模板](templates/bug-report.md)
 - [用例表模板](templates/test-case.csv)
 
-计划中（还没写，不建空文件）：
-
-- 03 回归范围怎么定：冒烟、核心、全量三级的划分依据，以及什么时候可以不做全量
-
-原本也挂在计划里的「配置表六类规则」已经单独做完了，不在这个仓库：
+「配置表六类规则」原本也挂在计划里，已经单独做完了，不在这个仓库：
 
 - [config-table-testkit](https://github.com/LL10SS-only/config-table-testkit)——必填、类型、唯一、引用、区间、跨表一致，六类规则 + 12 个 pytest，输出精确到 Excel 物理行号
+
+没有其他「计划中」的空条目。写不成判据的东西不放进来充数。
 
 ## 仓库结构
 
 ```
 game-qa-playbook/
-├── docs/                    两篇方法正文 + 单页版（index.html）
+├── docs/                    三篇方法正文 + 单页版（index.html）
 ├── samples/                 五类脱敏资产，四个目录各一份 README
 ├── templates/               缺陷单、用例表
 ├── CONTRIBUTING.md          命名与提交规范
