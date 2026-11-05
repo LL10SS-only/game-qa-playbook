@@ -9,14 +9,14 @@
 ```
 .
 ├── docs/                    方法与复盘正文（编号即阅读顺序）
+│   └── index.html           单页版作品集（GitHub Pages 入口）
 ├── samples/                 脱敏后的测试资产，五类
 │   ├── 01-scene-cases/      场景模块用例库 + 检查项框架
 │   ├── 02-weak-network/     弱网与断线重连专项
 │   ├── 03-system-modules/   五张系统级测试点脑图
 │   ├── 04-map-design/       地图类玩法测试点框架
 │   └── 05-desensitization.md
-├── templates/               缺陷单、用例表模板
-└── docs/index.html          单页版作品集（GitHub Pages）
+└── templates/               缺陷单、用例表模板
 ```
 
 分层的道理只有一条：**`docs/` 放「我怎么想」，`samples/` 放「我做出什么」，`templates/` 放「别人能直接拿去用」**。
@@ -83,7 +83,7 @@ feat(samples): 场景用例库加 15 类检查项框架
 
 **放进去的只能是**：结构说明、规模统计、判断依据、自造的示例数据。面试时现场打开原件讲，比把原件挂网上安全，也讲得更清楚。
 
-脱敏处理的口径和 413 处的分布写在 [`samples/05-desensitization.md`](samples/05-desensitization.md)。
+脱敏处理的口径和 447 处的分布写在 [`samples/05-desensitization.md`](samples/05-desensitization.md)。
 
 ## 五、加一份新样本的步骤
 
